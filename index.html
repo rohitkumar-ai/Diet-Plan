@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriPlan - Personalized Diet Recommender</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="diet.jpg" alt="NutriPlan Logo">
+                <h1>NutriPlan</h1>
+            </div>
+            <p class="tagline">Your personalized diet recommendation system</p>
+        </header>
+
+        <main>
+            <div class="form-container">
+                <h2>Create Your Profile</h2>
+                
+                <form id="dietForm">
+                    <!-- Added Name and Address Fields -->
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" rows="3" placeholder="Enter your address"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" min="15" max="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="radio-group">
+                            <input type="radio" id="male" name="gender" value="male" checked>
+                            <label for="male">Male</label>
+                            <input type="radio" id="female" name="gender" value="female">
+                            <label for="female">Female</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" id="weight" min="30" max="200" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="height">Height (cm)</label>
+                            <input type="number" id="height" min="100" max="250" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activity">Activity Level</label>
+                        <select id="activity" required>
+                            <option value="sedentary">Sedentary (little or no exercise)</option>
+                            <option value="light">Lightly active (light exercise 1-3 days/week)</option>
+                            <option value="moderate" selected>Moderately active (moderate exercise 3-5 days/week)</option>
+                            <option value="active">Very active (hard exercise 6-7 days/week)</option>
+                            <option value="extreme">Extremely active (very hard exercise & physical job)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goal">Goal</label>
+                        <select id="goal" required>
+                            <option value="lose">Lose Weight</option>
+                            <option value="maintain" selected>Maintain Weight</option>
+                            <option value="gain">Gain Weight</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="allergies">Allergies/Dietary Restrictions</label>
+                        <div class="checkbox-group">
+                            <div><input type="checkbox" id="dairy" name="allergies" value="dairy"><label for="dairy">Dairy</label></div>
+                            <div><input type="checkbox" id="nuts" name="allergies" value="nuts"><label for="nuts">Nuts</label></div>
+                            <div><input type="checkbox" id="gluten" name="allergies" value="gluten"><label for="gluten">Gluten</label></div>
+                            <div><input type="checkbox" id="seafood" name="allergies" value="seafood"><label for="seafood">Seafood</label></div>
+                            <div><input type="checkbox" id="eggs" name="allergies" value="eggs"><label for="eggs">Eggs</label></div>
+                            <div><input type="checkbox" id="none" name="allergies" value="none" checked><label for="none">None</label></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="diet-type">Preferred Diet Type</label>
+                        <select id="diet-type" required>
+                            <option value="balanced" selected>Balanced</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="keto">Keto</option>
+                            <option value="mediterranean">Mediterranean</option>
+                            <option value="paleo">Paleo</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Get My Diet Plan <i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+
+            <div class="results-container" id="results" style="display: none;">
+                <!-- Added User Info Display -->
+                <div class="user-info-card">
+                    <h3>Plan For: <span id="user-name">User Name</span></h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <span id="user-address">User Address</span></p>
+                </div>
+                
+                <div class="nutrition-summary">
+                    <div class="nutrition-card">
+                        <h3>Calories</h3>
+                        <p id="calories-result">0</p>
+                        <p>kcal/day</p>
+                    </div>
+                    <div class="nutrition-card">
+                        <h3>Protein</h3>
+                        <p id="protein-result">0</p>
+                        <p>grams/day</p>
+                    </div>
+                    <div class="nutrition-card">
+                        <h3>Carbs</h3>
+                        <p id="carbs-result">0</p>
+                        <p>grams/day</p>
+                    </div>
+                    <div class="nutrition-card">
+                        <h3>Fat</h3>
+                        <p id="fat-result">0</p>
+                        <p>grams/day</p>
+                    </div>
+                </div>
+
+                <div class="meal-plan">
+                    <h3>Sample Meal Plan</h3>
+                    <div class="meal-cards">
+                        <div class="meal-card">
+                            <h4><i class="fas fa-sun"></i> Breakfast</h4>
+                            <p id="breakfast-meal">Loading recommendations...</p>
+                        </div>
+                        <div class="meal-card">
+                            <h4><i class="fas fa-sun"></i> Lunch</h4>
+                            <p id="lunch-meal">Loading recommendations...</p>
+                        </div>
+                        <div class="meal-card">
+                            <h4><i class="fas fa-moon"></i> Dinner</h4>
+                            <p id="dinner-meal">Loading recommendations...</p>
+                        </div>
+                        <div class="meal-card">
+                            <h4><i class="fas fa-apple-alt"></i> Snacks</h4>
+                            <p id="snacks-meal">Loading recommendations...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="print-btn" onclick="window.print()"><i class="fas fa-print"></i> Print Plan</button>
+                <button class="new-plan-btn" onclick="resetForm()"><i class="fas fa-redo"></i> Create New Plan</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2025 NutriPlan-Rohit kumar | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
