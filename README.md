@@ -15,3 +15,4 @@ Simple dashboard to view progress
 
 🛠️ Tech Stack
 Frontend: HTML, CSS, JavaScript / React (optional)
+https://sweet-moxie-604abf.netlify.app/
